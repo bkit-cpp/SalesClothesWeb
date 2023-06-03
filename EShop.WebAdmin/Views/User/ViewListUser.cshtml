@@ -1,0 +1,95 @@
+﻿@using EShop.ViewModels.Common;
+@model PagedResult<EShop.ViewModels.Systems.Users.UserVm>
+
+@{
+    ViewData["Title"] = "List user";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">User</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách người dùng</li>
+    </ol>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="h3 mb-2 text-gray-800">Danh sách User</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th>Họ</th>
+                            <th>Số điện thoại</th>
+                            <th>Tên tài khoản</th>
+                            <th>Email</th>
+                            <th>Ngày sinh</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Dob)
+                                </td>
+                                <td>
+                                    <a href="/User/Update/@item.Id" class="btn btn-rounded btn-info">Sửa</a>
+                                    <a class="btn btn-rounded btn-danger" id="delete-user" value=" @item.Id.ToString()">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+@section Scripts
+{
+    <script>
+        var del = document.getElementById("delete-user");
+        var id = del.getAttribute("value");
+
+        del.onclick = () => {
+            if (confirm("Bạn có chắc muốn xóa người dùng này ra khỏi hệ thống ?") == true) {
+                window.location.href = `/User/Delete/`+ id;
+            } else {
+                window.location.href = `/User/ViewListUser`;
+            }
+        }
+    </script>
+}
+

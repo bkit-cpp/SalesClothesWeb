@@ -1,0 +1,64 @@
+﻿@model EShop.ViewModels.System.Users.UserUpdateRequest
+
+@{
+    ViewData["Title"] = "Update user";
+}
+<h4 style="margin: 20px;">User update</h4>
+<hr />
+<div style="margin: 20px;" class="row">
+    <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Form user</h5>
+            <div class="card-body">
+                <form id="basicform" data-parsley-validate="" asp-action="Update">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName">First name</label>
+                        <input asp-for="FirstName" type="text" data-parsley-trigger="change" required="" placeholder="" autocomplete="off" class="form-control">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" type="text" data-parsley-trigger="change" required="" placeholder="" autocomplete="off" class="form-control">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" type="text" placeholder="" required="" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Phone number</label>
+                        <input asp-for="PhoneNumber" type="number" required="" placeholder="" class="form-control">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Dob">Birthday</label>
+                        <input asp-for="Dob" type="date" required="" placeholder="" class="form-control">
+                        <span asp-validation-for="Dob" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserName">User Name</label>
+                        <input asp-for="UserName" type="text" required="" placeholder="" class="form-control">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" data-parsley-equalto="#inputPassword" type="password" required="" placeholder="" class="form-control">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 pl-0">
+                            <p class="text-right">
+                                <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                <button href="/User/ViewListUser" class="btn btn-space btn-secondary">Cancel</button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
