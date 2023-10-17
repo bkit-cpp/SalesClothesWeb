@@ -1,0 +1,75 @@
+﻿@model EShop.ViewModels.Catalog.Categories.CategoryCreateRequest
+
+@{
+    ViewData["Title"] = "Tạo mới sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tạo mới người dùng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tạo mới sản phẩm</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="User">Về danh sách</a>
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-4">
+                <form asp-action="Create" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ParentId" class="control-label"></label>
+                        <input asp-for="ParentId" type="number" class="form-control" />
+                        <span asp-validation-for="ParentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SortOrder" class="control-label"></label>
+                        <input asp-for="SortOrder" type="number" class="form-control" />
+                        <span asp-validation-for="SortOrder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IsShowOnHome" class="control-label"></label>
+                        <input asp-for="IsShowOnHome" type="text" class="form-control" />
+                        <span asp-validation-for="IsShowOnHome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SeoDescription" class="control-label"></label>
+                        <input asp-for="SeoDescription" class="form-control" />
+                        <span asp-validation-for="SeoDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SeoTitle" class="control-label"></label>
+                        <input asp-for="SeoTitle" class="form-control" />
+                        <span asp-validation-for="SeoTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SeoAlias" class="control-label"></label>
+                        <input asp-for="SeoAlias" class="form-control" />
+                        <span asp-validation-for="SeoAlias" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <input asp-for="Status" class="form-control" />
+                        <span asp-validation-for="SeoAlias" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LanguageId" class="control-label"></label>
+                        <input asp-for="LanguageId" class="form-control" />
+                        <span asp-validation-for="LanguageId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

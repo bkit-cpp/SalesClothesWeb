@@ -1,10 +1,8 @@
 ﻿@using EShop.ViewModels.Common;
 @model PagedResult<EShop.ViewModels.Catalog.Products.ProductVm>
-
-@{
-    ViewData["Title"] = "Danh sách sản phẩm";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@using EShop.ViewModels.Catalog.Products;
+@{ ViewData["Title"] = "Danh sách sản phẩm";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="container-fluid">
     <h1 class="mt-4">Danh sách sản phẩm</h1>
@@ -24,7 +22,11 @@
                             <div class="col-md-4">
                                 <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             </div>
-
+                            <div class="col-md-4">
+                                <select name="categoryId" asp-items="@ViewBag.Categories">
+                                    <option>--Chọn Danh Mục</option>
+                                </select>
+                            </div>
                             <div class="cold-md-3">
                                 <button type="submit" class="btn btn-primary">Tìm</button>
                                 <button type="button" onclick="window.location.href='/Product/ViewListProducts'" class="btn btn-dark">Reset</button>
@@ -39,10 +41,9 @@
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
                 {
-                    <div id="msgAlert" class="alert alert-success" role="alert">
-                        @ViewBag.SuccessMsg
-                    </div>
-                }
+    <div id="msgAlert" class="alert alert-success" role="alert">
+        @ViewBag.SuccessMsg
+    </div>}
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -60,16 +61,19 @@
 
                             </th>
                             <th>
-                                Tiêu Đề
 
+                                Mô Tả
                             </th>
                             <th>
                                 Từ Khóa
 
                             </th>
                             <th>
-                                Mô Tả
+                                Từ Khóa Mô Tả
 
+                            </th>
+                            <th>
+                                Tiêu Đề
                             </th>
                             <th>
                                 Giá nhập
@@ -80,52 +84,59 @@
                             <th>
                                 Số lượng tồn
                             </th>
-
-                           
+                            <th>
+                                Hình Ảnh
+                            </th>
+                            <th>
+                                Lựa Chọn
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Items)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ViewCount)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SeoAlias)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SeoTitle)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SeoDescription)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OriginalPrice)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stock)
-                            </td>
-                           
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeoAlias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeoTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeoDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
 
-                            <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                            </td>
-                        </tr>
-                        }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem=>item.ThumbnailImage)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Sửa", "Update", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>}
                     </tbody>
                 </table>
             </div>

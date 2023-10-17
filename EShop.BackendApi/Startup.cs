@@ -9,7 +9,6 @@ using EShop.Application.Authenticate;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +17,10 @@ using EShop.Application.Services.Users;
 using EShop.Data.EF;
 using EShop.Application.Services.Catalog.Products;
 using EShop.Application.Common;
+using EShop.Application.Services.Catalog.Categories;
+using EShop.Application.Services.Utilities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EShop.BackendApi
 {
@@ -47,11 +50,13 @@ namespace EShop.BackendApi
             services.AddSingleton(appSettings);
 
             services.AddScoped<IEShopAuthentication, EShopAuthenticationService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductInCategoryService, ProductInCategoryService>();
+            services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<ICategoryTranslationService, CategoryTranslationService>();
             services.AddTransient<IUserService, UserService>();
-
             services.AddControllers()
              .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
@@ -86,10 +91,7 @@ namespace EShop.BackendApi
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseAuthentication();
 

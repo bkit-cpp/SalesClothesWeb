@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EShop.ViewModels.System.Products
+namespace EShop.ViewModels.Common.Products
 {
     public class ProductDeleteRequest
     {

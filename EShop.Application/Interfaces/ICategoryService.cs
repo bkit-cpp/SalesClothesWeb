@@ -13,7 +13,7 @@ namespace EShop.Application.Interfaces
 
         Task<ApiResult<int>> CreateAsync(CategoryCreateRequest request);
 
-        Task<ApiResult<CategoryViewModels>> GetById(string languageId, int id);
+        Task<CategoryViewModels> GetById(string languageId, int id);
 
         Task<ApiResult<bool>> Update(int id);
     }

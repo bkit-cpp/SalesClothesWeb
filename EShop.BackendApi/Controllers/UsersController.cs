@@ -35,14 +35,15 @@ namespace EShop.BackendApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
         {
-            _authenticate.Authentication(Request);
+            //_authenticate.Authentication(Request);
             var user = await _userService.Login(request);
             if (user == null)
                 return BadRequest("User not found");
             //check in FE nếu tìm thấy
             return Ok(user);
         }
-
+    
+    
         /// <summary>
         /// Register: Tạo mới một user
         /// </summary>
@@ -52,7 +53,7 @@ namespace EShop.BackendApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            _authenticate.Authentication(Request);
+          //  _authenticate.Authentication(Request);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -72,7 +73,7 @@ namespace EShop.BackendApi.Controllers
         [HttpGet("Paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetListUserPagingRequest request)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var users = await _userService.GetUsersPaging(request);
             return Ok(users);
         }
@@ -85,7 +86,7 @@ namespace EShop.BackendApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var result = await _userService.Delete(id);
             return Ok(result);
         }
@@ -99,7 +100,7 @@ namespace EShop.BackendApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateRequest request)
         {
-            _authenticate.Authentication(Request);
+            //_authenticate.Authentication(Request);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -119,7 +120,7 @@ namespace EShop.BackendApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var users = await _userService.GetById(id);
             return Ok(users);
         }

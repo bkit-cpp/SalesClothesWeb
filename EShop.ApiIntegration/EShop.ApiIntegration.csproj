@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EShop.Data\EShop.Data.csproj" />
+    <ProjectReference Include="..\EShop.Utilities\EShop.Utilities.csproj" />
+    <ProjectReference Include="..\EShop.ViewModels\EShop.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>

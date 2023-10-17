@@ -1,6 +1,7 @@
-﻿using EShop.ViewModels.System.Users;
+﻿
+using EShop.ApiIntegration;
+using EShop.ViewModels.System.Users;
 using EShop.ViewModels.Systems.Users;
-using EShop.WebAdmin.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

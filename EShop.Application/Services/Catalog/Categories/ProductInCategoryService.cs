@@ -16,19 +16,24 @@ namespace EShop.Application.Services.Catalog.Categories
         {
             _context = context;
         }
-        public Task CreateAsync(ProductInCategory productInCategory)
+        public async Task CreateAsync(ProductInCategory productInCategory)
         {
-            throw new NotImplementedException();
+            _context.ProductInCategories.Add(productInCategory);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCategoryId(int id)
+        public async Task DeleteCategoryId(int id)
         {
-            throw new NotImplementedException();
+            var productincategory = GetByCategoryId(id);
+            _context.ProductInCategories.Remove(productincategory);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteProductId(int id)
+        public async Task DeleteProductId(int id)
         {
-            throw new NotImplementedException();
+            var productincategory = GetByCategoryId(id);
+            _context.ProductInCategories.Remove(productincategory);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<ProductInCategory> GetAllAsync()

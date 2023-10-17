@@ -35,7 +35,6 @@ namespace EShop.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
             modelBuilder.ApplyConfiguration(new SlideConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
@@ -61,7 +60,6 @@ namespace EShop.Data.EF
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
-
         public DbSet<Promotion> Promotions { get; set; }
 
         public DbSet<Transaction> Transactions { get; set; }

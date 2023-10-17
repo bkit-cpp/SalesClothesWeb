@@ -1,4 +1,5 @@
 ﻿using EShop.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace EShop.Data.Entities
 {
-    public class User 
+    public class User
     {
         public User()
         {

@@ -10,16 +10,23 @@ using EShop.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using EShop.ViewModels.Common;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace EShop.Application.Services.Users
 {
     public class UserService : IUserService
     {
         private readonly EShopDbContext _context;
-
-        public UserService(EShopDbContext context)
+        private readonly IConfiguration _config;
+        public UserService(EShopDbContext context,  IConfiguration configuration)
         {
             _context = context;
+            _config = configuration;
+           
         }
 
         /// <summary>
@@ -68,7 +75,7 @@ namespace EShop.Application.Services.Users
                     LastName = request.LastName,
                     Dob = request.Dob,
                     Email = request.Email,
-                    PhoneNumber = request.PhoneNumber,
+                    //PhoneNumber = request.PhoneNumber,
                     UserName = request.UserName,
                     Password = Convert.ToBase64String(str)
                 };
@@ -217,5 +224,38 @@ namespace EShop.Application.Services.Users
                 throw new BadRequestException(ex.ToString(), 401);
             }
         }
+
+      /*  public async Task<ApiResult<string>> Authentication(LoginRequest request)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user == null)
+                return new ApiErrorResult<string>("Taì khoản không tồn tại ");
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            if (!result.Succeeded)
+            {
+                return null;
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            //Luu Token Can Thiet
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.GivenName,user.UserName),
+                new Claim(ClaimTypes.Role,string.Join(";",roles)),
+                new Claim(ClaimTypes.Name,request.UserName)
+            };
+            //Ma Hoa Bang Thu Vien SymmerTric
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(_config["Tokens:Issuer"],
+                _config["Tokens:Issuer"],
+                claims,
+                expires: DateTime.Now.AddSeconds(10),
+                signingCredentials: creds
+                );
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
+        }
+      */
+      
     }
 }

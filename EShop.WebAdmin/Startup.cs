@@ -1,7 +1,6 @@
 
+using EShop.ApiIntegration;
 using EShop.ViewModels.Systems.Users;
-using EShop.WebAdmin.Interfaces;
-using EShop.WebAdmin.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -36,9 +35,8 @@ namespace EShop.WebAdmin
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        
             services.AddTransient<IUserApiClient, UserApiClient>();
+            services.AddTransient<ICategoryAPIClient, CategoryApiClient>();
             services.AddTransient<IProductApiClient, ProductApiClient > ();
 
         }

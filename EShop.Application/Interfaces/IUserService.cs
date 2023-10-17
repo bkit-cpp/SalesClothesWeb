@@ -10,6 +10,7 @@ namespace EShop.Application.Interfaces
     public interface IUserService
     {
          Task<ApiResult<User>> Login(LoginRequest request);
+       // Task<ApiResult<string>> Authentication(LoginRequest request);
 
         Task<ApiResult<bool>> Register(RegisterRequest request);
 

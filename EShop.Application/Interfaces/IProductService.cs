@@ -38,5 +38,7 @@ namespace EShop.Application.Services.Catalog.Products
         Task<List<ProductImageViewModel>> GetListImages(int productId);
 
         Task<PagedResult<ProductVm>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
+        Task<List<ProductVm>> GetFeaturedProduct(string languageId, int take);
+        Task<List<ProductVm>> GetLatestProduct(string languageId, int take);
     }
 }

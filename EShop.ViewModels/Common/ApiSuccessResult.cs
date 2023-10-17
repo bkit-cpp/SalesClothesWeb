@@ -13,11 +13,11 @@ namespace EShop.ViewModels.Common
             ResultObj = resultObj;
         }
 
-        public ApiSuccessResult( )
+        public ApiSuccessResult()
         {
             IsSuccessed = true;
             Message = "Thành công";
-            
+
         }
     }
 }

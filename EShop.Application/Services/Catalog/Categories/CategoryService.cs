@@ -57,12 +57,12 @@ namespace EShop.Application.Services.Catalog.Categories
         {
             try
             {
-               // _context.Database.GetDbConnection().ToString();
+              //  _context.Database.GetDbConnection().ToString();
                 var query = from c in _context.Categories
                             join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
                             where ct.LanguageId == languageId
                             select new { c, ct };
-                var result = await query.Select(x => new CategoryViewModels()
+                  return await query.Select(x => new CategoryViewModels()
                 {
                     Id = x.c.Id,
                     Name = x.ct.Name,
@@ -72,7 +72,7 @@ namespace EShop.Application.Services.Catalog.Categories
                     SeoDesription = x.ct.SeoDescription,
                     SeoTitle = x.ct.SeoTitle
                 }).ToListAsync();
-                return new List<CategoryViewModels>(result);
+            
             }
             catch (Exception ex)
             {
@@ -80,7 +80,7 @@ namespace EShop.Application.Services.Catalog.Categories
             }
         }
 
-        public async Task<ApiResult<CategoryViewModels>> GetById(string languageId, int id)
+        public async Task<CategoryViewModels> GetById(string languageId, int id)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace EShop.Application.Services.Catalog.Categories
                     ParentId = x.c.ParentId
                 }).FirstOrDefaultAsync();
 
-                return new ApiSuccessResult<CategoryViewModels>(result);
+                return result;
             }
             catch (Exception ex)
             {

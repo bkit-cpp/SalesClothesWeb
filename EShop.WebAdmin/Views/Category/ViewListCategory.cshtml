@@ -1,0 +1,68 @@
+﻿@using EShop.ViewModels.Common;
+@model List<EShop.ViewModels.Catalog.Categories.CategoryViewModels>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách danh mục</li>
+    </ol>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Catagory</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="h3 mb-2 text-gray-800">Danh sách Catagory</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+    <div id="msgAlert" class="alert alert-success" role="alert">
+        @ViewBag.SuccessMsg
+    </div>}
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th>Thứ tự</th>
+                            <th>Trạng thái hoạt động</th>
+                            <th>Mô tả chi tiết</th>
+                            <th>Tiêu đề</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SortOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeoDesription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeoTitle)
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateStatus", "Category", new { item.Id }, FormMethod.Post))
+                    {
+    <button type="submit" class="btn btn-rounded btn-danger">Đổi trạng thái</button>}
+                </td>
+            </tr>}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->

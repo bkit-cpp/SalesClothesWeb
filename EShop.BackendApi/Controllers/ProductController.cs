@@ -85,15 +85,16 @@ namespace EShop.BackendApi.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id,[FromForm] ProductUpdateRequest request)
         {
-            _authenticate.Authentication(Request);
+            //_authenticate.Authentication(Request);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var affectedReSult = await _ProductService.Update(request);
+            request.Id = id;
+            var affectedReSult = await _ProductService.Update( request);
             if (affectedReSult.ResultObj == 0)
                 return BadRequest();
             return Ok();
@@ -107,7 +108,7 @@ namespace EShop.BackendApi.Controllers
         [HttpDelete("{productId}")]
         public async Task<IActionResult> Delete(int productId)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var affectedReSult = await _ProductService.Delete(productId);
             if (affectedReSult == 0)
                 return BadRequest();
@@ -123,7 +124,7 @@ namespace EShop.BackendApi.Controllers
         [HttpPatch("{productId}/{newPrice}")]
         public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var IsSucessFul = await _ProductService.UpdatePrice(productId, newPrice);
             if (IsSucessFul)
                 return Ok();
@@ -139,7 +140,7 @@ namespace EShop.BackendApi.Controllers
         [HttpPost("{productId}/images")]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -160,7 +161,7 @@ namespace EShop.BackendApi.Controllers
         [HttpPut("{productId}/images/{imageId}")]
         public async Task<IActionResult> UpdateImage(int imageId, [FromForm] ProductImageUpdateRequest request)
         {
-            _authenticate.Authentication(Request);
+            //_authenticate.Authentication(Request);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -179,7 +180,7 @@ namespace EShop.BackendApi.Controllers
         [HttpDelete("{productId}/images/{imageId}")]
         public async Task<IActionResult> DeleteImage(int imageId)
         {
-            _authenticate.Authentication(Request);
+          //  _authenticate.Authentication(Request);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -198,11 +199,25 @@ namespace EShop.BackendApi.Controllers
         [HttpGet("{productId}/images/{imageId}")]
         public async Task<IActionResult> GetImageById(int imageId)
         {
-            _authenticate.Authentication(Request);
+           // _authenticate.Authentication(Request);
             var image = await _ProductService.GetImageById(imageId);
             if (image == null)
                 return BadRequest("Can' not find Product");
             return Ok(image);
+        }
+        [HttpGet("featured/{languageId}/{take}")]
+        public async Task<IActionResult> GetFeaturedProducts(int take,string languageId)
+        {
+            var featured = await _ProductService.GetFeaturedProduct(languageId,take);
+            return Ok(featured);
+
+        }
+        [HttpGet("latest/{languageId}/{take}")]
+        public async Task<IActionResult> GetLatestProducts(int take, string languageId)
+        {
+            var latest = await _ProductService.GetFeaturedProduct(languageId, take);
+            return Ok(latest);
+
         }
     }
 }
